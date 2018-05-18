@@ -1,0 +1,1 @@
+read t;s=0;for((i=0;i<$t;i++));do read x;if [[ x -gt 0 ]];then((s+=x));fi;done;echo $s
