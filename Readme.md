@@ -1,0 +1,3 @@
+# Competitive Programming Codes
+
+Solutions/Attempts of various competitive Programming Problems @ SPOJ, CODECHEF, HACKEREARTH .....
