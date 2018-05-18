@@ -1,0 +1,101 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int main()
+{
+    int t,i,temp,j,k,l,flag,carry,n;
+    string hc;
+    cin>>t;
+    while(t--)
+    {
+        cin>>hc;
+        n=hc.length();
+        for(i=0,flag=1;i<n;i++)
+        {
+            if(hc[i]!='9')
+            {
+                flag=0;
+                break;
+            }
+        }
+        if(flag==1)
+        {
+            for(i=0;i<=n;i++)
+            {
+                if(i==0||i==n)
+                    cout<<'1';
+                else
+                    cout<<'0';
+            }
+            cout<<endl;
+        }
+        else
+        {
+            if(n%2==0)
+            {
+                k=(n/2)-1;
+                l=n/2;
+            }
+            else
+            {
+                k=(n/2)-1;
+                l=n/2+1;
+            }
+            for(i=k,j=l,flag=0;i>=0&&j<n;i--,j++)
+            {
+                if(hc[i]==hc[j])
+                    continue;
+                else if(hc[i]>hc[j])
+                {
+                    flag=1;
+                    break;
+                }
+                else
+                {
+                    flag=-1;
+                    break;
+                }
+            }
+            if(flag==1)
+            {
+                for(i=k,j=l;i>=0&&j<n;i--,j++)
+                {
+                    hc[j]=hc[i];
+                }
+                cout<<hc<<endl;
+            }
+            else
+            {
+                if(n%2==1)
+                {
+                    temp=hc[n/2]-'0'+1;
+                    carry=temp/10;
+                    hc[n/2]=temp%10+'0';
+                    for(i=k,j=l;i>=0&&j<n;i--,j++)
+                    {
+                        temp=hc[i]-'0';
+                        temp=temp+carry;
+                        carry=temp/10;
+                        hc[i]='0'+temp%10;
+                        hc[j]=hc[i];
+                    }
+                    cout<<hc<<endl;
+                }
+                else
+                {
+                    carry=1;
+                    for(i=k,j=l;i>=0&&j<n;i--,j++)
+                    {
+                        temp=hc[i]-'0';
+                        temp=temp+carry;
+                        carry=temp/10;
+                        hc[i]='0'+temp%10;
+                        hc[j]=hc[i];
+                    }
+                    cout<<hc<<endl;
+                }
+            }
+        }
+    }
+    return 0;
+}
