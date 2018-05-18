@@ -73,3 +73,10 @@ dkms.conf
 # End of https://www.gitignore.io/api/c
 
 in.txt
+/Competitive.sublime-project
+
+/Competitive.sublime-workspace
+
+/Programming.sublime-project
+
+/Programming.sublime-workspace
