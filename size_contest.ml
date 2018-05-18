@@ -1,0 +1,1 @@
+let t=read_int();;let rec sum t=if t==0 then 0 else let c=read_int()in((c+abs c)/2)+sum(t-1);;print_int (sum t);;
