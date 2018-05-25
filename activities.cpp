@@ -17,10 +17,11 @@ bool comp(pii a, pii b)
 void print(int n)
 {
 	for(int i=0; i<n; i++)
-	{
-		printf("%d %d, ", cls[i].first, cls[i].second);
-	}
+		printf("%4d, ", cls[i].first);
 	printf("\n");
+	for(int i=0; i<n; i++)
+		printf("%4d, ", cls[i].second);
+	printf("\n\n");
 }
 
 bool comp1(pii a, pii b)
@@ -31,8 +32,8 @@ bool comp1(pii a, pii b)
 
 bool comp2(pii a, pii b)
 {
-	if(a.first < b.second) return true;
-	return false;
+	if(a.first >= b.second) return false;
+	return true;
 }
 
 int ans(int n)
@@ -40,19 +41,19 @@ int ans(int n)
 	dp[0]=0;
 	sum[0]=0;
 	int l, h;
-	// printf("%d\n", sum[n]);
+	printf("%s%4s%4s%4s%4s\n","i","l","h","sl","sh");
 	for(int i=0; i<n; i++)
 	{
 		dp[i+1] = 0;
-		l = lower_bound(cls, cls+i, cls[i], comp1) - cls;
+		sum[i+1] = sum[i];
+		l = lower_bound(cls, cls+i-1, cls[i], comp1) - cls;
 		h = upper_bound(cls, cls+i, cls[i], comp2) - cls;
-		printf("cls[i]:(%d,	%d l:%d h:%d, ", cls[i], l, h);
+		printf("%d%4d%4d%4d%4d\n", i, l, h, sum[h], sum[l]);
 		if(h >= l)
-			dp[i+1] = (sum[h-1+1] - sum[l-1+1]) % M;
+			dp[i+1] = (sum[h] - sum[l]) % M;
 		dp[i+1] = (dp[i+1] + 1) % M;
 		sum[i+1] = (sum[i] + dp[i+1]) % M;
 	}
-	printf("\n");
 	for(int i=0;i<=n;i++)
 		printf("%d, ",dp[i]);
 	printf("\n");
