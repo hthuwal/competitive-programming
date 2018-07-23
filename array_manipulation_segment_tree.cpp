@@ -10,6 +10,27 @@ lli max(lli a, lli b)
 	return a>b?a:b;
 }
 
+/**
+ * performs updates untill value to be 
+ * stored in lazy is within int limits
+ */
+void unlazy(int ti, int ss, int se)
+{
+	tree[ti] += lazy[ti];
+	int left = 2*ti + 1;
+	int right = 2*ti + 2;
+	if(ss!=se)
+	{
+		if(lazy[left] + lazy[ti] < 0)
+			unlazy(left, ss, (ss+se)/2);
+		if(lazy[right] + lazy[ti] < 0)
+			unlazy(right, 1+(ss+se)/2, se);
+
+		lazy[left] += lazy[ti];
+		lazy[right] += lazy[ti];
+	}
+	lazy[ti] = 0;
+}
 
 void update(int ti, int ss, int se, int ul, int ue, int value)
 {
@@ -18,13 +39,14 @@ void update(int ti, int ss, int se, int ul, int ue, int value)
 
 	if (lazy[ti] != 0)
 	{
-		tree[ti] += lazy[ti];
-		if(ss != se)
-		{
-			lazy[left] += lazy[ti];
-			lazy[right] += lazy[ti];
-		}
-		lazy[ti] = 0;
+		unlazy(ti, ss, se);
+		// tree[ti] += lazy[ti];
+		// if(ss != se)
+		// {
+		// 	lazy[left] += lazy[ti];
+		// 	lazy[right] += lazy[ti];
+		// }
+		// lazy[ti] = 0;
 	}
 
 	if(ss > se || ss > ue || se < ul)
