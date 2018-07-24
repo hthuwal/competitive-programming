@@ -1,6 +1,7 @@
 def get_all_substrings(input_string):
     length = len(input_string)
-    return [input_string[i:j + 1] for i in range(length) for j in range(i, length)]
+    hc = [input_string[i:j + 1] for i in range(length) for j in range(i, length)]
+    return [''.join(sorted(list(x))) for x in hc]
 
 
 def get_hash(string):
@@ -12,23 +13,18 @@ def get_hash(string):
     return hc
 
 
-hashes = {}
-
 q = int(input().strip())
 while q > 0:
     ans = 0
+    counts = {}
     string = input()
     all_subs = get_all_substrings(string)
-    for i in range(len(all_subs)):
-        for j in range(i + 1, len(all_subs)):
-            a = all_subs[i]
-            b = all_subs[j]
-            if a not in hashes:
-                hashes[a] = get_hash(a)
-            if b not in hashes:
-                hashes[b] = get_hash(b)
-
-            if (hashes[a] == hashes[b]):
-                ans += 1
+    for substring in all_subs:
+        if substring not in counts:
+            counts[substring] = 0
+        counts[substring] += 1
+    for substring in counts:
+        c = counts[substring]
+        ans += ((c * (c - 1)) // 2)
     print(ans)
     q -= 1
