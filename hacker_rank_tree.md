@@ -53,4 +53,28 @@ int height(Node* root) {
 }
 ```
 
+### [Lowest Common Ancestor](https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem)
 
+- Assuming the tree always contains the two values
+- values in tree are all unique
+
+```cpp
+Node *lca(Node *root, int v1,int v2) {
+    if(root == nullptr)
+        return nullptr;
+    if(root->data == v1 || root->data == v2)
+        return root;
+    else
+    {
+        Node* cand_from_left = lca(root->left, v1, v2);
+        Node* cand_from_right = lca(root->right, v1, v2);
+        
+        if(cand_from_left != nullptr and cand_from_right != nullptr)
+            return root;
+        else if(cand_from_left != nullptr)
+            return cand_from_left;
+        else
+            return cand_from_right;
+    }
+}
+```
