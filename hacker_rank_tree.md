@@ -5,13 +5,21 @@
 - The  value of every node is distinct.  
 
 ```cpp
+/*
+    root: root of the current subtree
+    lbound: minimum value the nodes in this subtree can have
+    rbound: maximum value the nodes in this subtree can have
+*/
 bool checkBST_Util(Node* root, int lbound, int ubound) {
-    if(root == nullptr)
+    // no tree is a bst
+    if(root == nullptr) 
         return true;
 
+    // if roots's value doesn't satisifes the bounds
     if(root->data <= lbound || root->data >= ubound)
         return false;
     
+    // else check if the left and right subtrees satisfy their bounds or not
     return checkBST_Util(root->left, lbound, root->data) 
        and checkBST_Util(root->right, root->data, ubound);
 }
@@ -60,17 +68,26 @@ int height(Node* root) {
 
 ```cpp
 Node *lca(Node *root, int v1,int v2) {
+    // You reached end without encountering v1 or v2, therefor no common ancestor
     if(root == nullptr)
         return nullptr;
+
+    // if the root is equal to v1 or v2 then it must be the common ancestor
     if(root->data == v1 || root->data == v2)
         return root;
+
+    // if root is not equal to either one of them
     else
     {
-        Node* cand_from_left = lca(root->left, v1, v2);
-        Node* cand_from_right = lca(root->right, v1, v2);
+        Node* cand_from_left = lca(root->left, v1, v2); // find either of them in left subtree
+        Node* cand_from_right = lca(root->right, v1, v2); // find either of them in right subtree
         
+        // if both tree say they found something then you are the common ancestor
         if(cand_from_left != nullptr and cand_from_right != nullptr)
             return root;
+
+        // if only left tree says it find something then and right didn't
+        // then left's candidate is the answer
         else if(cand_from_left != nullptr)
             return cand_from_left;
         else
