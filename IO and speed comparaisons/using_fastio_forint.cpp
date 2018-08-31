@@ -15,7 +15,7 @@ inline void fastscan(int &x)
 
 int main(){
     int i,n;
-    printf("\nUsing Fattscan\n");
+    printf("\nUsing Fastscan\n");
     clock_t start = clock();
     for(int i=0;i<10000000;i++)
         fastscan(n);
