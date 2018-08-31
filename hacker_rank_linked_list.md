@@ -37,6 +37,37 @@ def has_cycle(head):
 
     return False
 ```
+### Insert in a single link list at index i
+
+- assuming the index given is valid and belongs to [0, n]
+
+```cpp
+#define sll SinglyLinkedListNode
+
+sll* insertNodeAtPosition(sll* head, int data, int position) {
+    sll* temp = head; //iski jagah pe daalna hai
+    sll* temp2 = head; //iske aage dalna hai
+    
+    while(position--)
+    {
+        temp2 = temp;
+        temp = temp->next;            
+    }
+    
+    sll *cur_node = new sll(data);
+    if(temp == head)
+    {
+        cur_node->next = head;
+        head = cur_node;
+    }
+    else
+    {
+        temp2->next = cur_node;
+        cur_node->next = temp;
+    }
+    return head;
+}
+```
 
 ### Insert in a sorted Doubly Linked List
 
