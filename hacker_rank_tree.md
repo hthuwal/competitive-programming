@@ -36,3 +36,21 @@ def hc(root, lower_bound_node, upper_bound_node):
 def checkBST(root):
     return hc(root, None, None)
 ```
+
+### [Find height of tree](https://www.hackerrank.com/challenges/tree-height-of-a-binary-tree/problem)
+
+```cpp
+int height(Node* root) {
+    if(root == nullptr)
+        return 0;
+    int hl = height(root->left);
+    int hr = height(root->right);
+
+    hl = root->left != nullptr?(hl+1): 0;
+    hr = root->right != nullptr?(hr+1): 0;
+
+    return max(hl, hr);
+}
+```
+
+
