@@ -1,18 +1,6 @@
 ### Reverse a doubly linked list
 
 ```cpp
-// Complete the reverse function below.
-
-/*
- * For your reference:
- *
- * DoublyLinkedListNode {
- *     int data;
- *     DoublyLinkedListNode* next;
- *     DoublyLinkedListNode* prev;
- * };
- *
- */
 DoublyLinkedListNode* reverse(DoublyLinkedListNode* head) {
     if(head==NULL || head->next == NULL) //No Node or only one node
         return head;
