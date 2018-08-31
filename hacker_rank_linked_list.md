@@ -1,4 +1,4 @@
-## Reverse a doubly linked list
+### Reverse a doubly linked list
 
 ```cpp
 // Complete the reverse function below.
@@ -28,4 +28,24 @@ DoublyLinkedListNode* reverse(DoublyLinkedListNode* head) {
     }
     return head;
 }
+```
+
+### Detect cycle in singly linked list
+```python
+def has_cycle(head):
+    slow = head
+    fast = Node(head.data, head.next)
+ 
+    # if they reach the end implies there is no cycle
+    while slow is not None and fast is not None:  # while none of them reach the end
+        # incrementing pointers
+        slow = slow.next
+        if fast.next is None:
+            return False
+        fast = fast.next.next
+
+        if slow == fast and slow is not None:
+            return True
+
+    return False
 ```
