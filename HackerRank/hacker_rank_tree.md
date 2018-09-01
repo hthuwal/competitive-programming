@@ -95,3 +95,25 @@ Node *lca(Node *root, int v1,int v2) {
     }
 }
 ```
+### [Huffman Decoding](https://www.hackerrank.com/challenges/tree-huffman-decoding/problem)
+
+```cpp
+void decode_huff(node * root, string s) {
+    node * head = root; //start from the root
+
+    for(int i=0; i<s.length(); i++)
+    {
+        if(s[i] == '0') // if current code is zero go left
+            head = head->left;
+        else // else go right
+            head = head->right;
+        
+        // if the node you reached is a leaf print the value and start from root again
+        if(head->left == NULL && head->right == NULL)
+        {
+            cout<<head->data;
+            head = root;
+        }
+    }
+}
+```
