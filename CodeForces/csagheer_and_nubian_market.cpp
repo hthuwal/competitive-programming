@@ -8,15 +8,23 @@ using namespace std;
 int costs[111111];
 int n;
 int s;
+map<string, pii> hc;
 
 pii recursive(int sobc, int soi, int i, int noi)
 {	
+
+
 	int cost = sobc + soi*noi;
 	if(i >= n || cost == s)
 	{
 		return make_pair(noi, cost);
 	}
 
+	ostringstream str1; 
+	str1 << sobc << soi << i << noi;
+	string key = str1.str();
+	if(hc.find(key) != hc.end())
+		return hc[key];
 	// consider not buying the ith item
 	pii ans1 = recursive(sobc, soi, i+1, noi);
 
@@ -32,17 +40,19 @@ pii recursive(int sobc, int soi, int i, int noi)
 	{
 		pii  ans2 = recursive(new_sobc, new_soi, i+1, new_noi);
 		if(ans1.first > ans2.first)
-			return ans1;
+			hc[key]=ans1;
 		else if(ans2.first > ans1.first)
-			return ans2;
+			hc[key]=ans2;
 		else{
 			if(ans1.second < ans2.second)
-				return ans1;
+				hc[key]=ans1;
 			else
-				return ans2;
+				hc[key]=ans2;
 		}
 	}
-	return ans1;
+	else
+		hc[key]=ans1;
+	return hc[key];
 }
 
 int main()
