@@ -8,7 +8,37 @@ using namespace std;
 int costs[111111];
 int n;
 int s;
-map<string, pii> hc;
+map<pii, pii> hc;
+
+// void dp()
+// {
+// 	vi sobc(n, 0);
+// 	vi soi(n, 0);
+// 	vi noi(n, 0);
+	
+// 	int cost = costs[0] + (0 + 1)*1;
+// 	if(cost <= s)
+// 	{
+// 		sobc[0]=costs[0];
+// 		soi[0]=1;
+// 		noi[0]=1;
+// 	}
+// 	for(int i=1;i<n;i++)
+// 	{
+// 		int new_sobc = sobc[i-1] + costs[i];
+// 		int new_soi = soi[i-1] + i + 1;
+// 		int new_noi = noi[i-1] + 1;
+
+// 		int new_cost = new_sobc + new_soi * new_noi;
+
+// 		if(new_cost <= s) // can buy this
+// 		{
+			
+// 		}
+
+// 	}
+
+// }
 
 pii recursive(int sobc, int soi, int i, int noi)
 {	
@@ -20,11 +50,11 @@ pii recursive(int sobc, int soi, int i, int noi)
 		return make_pair(noi, cost);
 	}
 
-	ostringstream str1; 
-	str1 << sobc << soi << i << noi;
-	string key = str1.str();
+	pii key = make_pair(s - cost, i);
+
 	if(hc.find(key) != hc.end())
 		return hc[key];
+	
 	// consider not buying the ith item
 	pii ans1 = recursive(sobc, soi, i+1, noi);
 
