@@ -11,16 +11,15 @@ map<pii, pii> hc;
 
 void dp()
 {
-	int sobc[n+1][n+1];
-	int soi[n+1][n+1];
+	int sobc[2][n+1];
+	int soi[2][n+1];
 
 	//initialization
 	for(int i=0;i<=n;i++)
 	{
-		sobc[i][0] = soi[i][0] = -1;
 		sobc[0][i] = soi[0][i] = 0;
-
 	}
+	sobc[1][0] = soi[1][0] = -1;
 
 	int items;
 	for(items=1; items<=n;items++)
@@ -29,57 +28,63 @@ void dp()
 		{
 			if(index<items)
 			{
-				sobc[items][index] = soi[items][index] = -1;
+				sobc[1][index] = soi[1][index] = -1;
 			}
 			else
 			{
 				// I dont try to buy this item
-				int sobc1 = sobc[items][index-1];
-				int soi1 = soi[items][index-1];
+				int sobc1 = sobc[1][index-1];
+				int soi1 = soi[1][index-1];
 
 				// If I try to buy this item
-				int sobc2 = sobc[items - 1][index-1];
-				int soi2 = soi[items-1][index-1];
+				int sobc2 = sobc[0][index-1];
+				int soi2 = soi[0][index-1];
 
 				int cost1 = sobc1 + soi1 * items;
 				int cost2 = sobc2 + costs[index] + (soi2 + index) * items;
 				
 				if(sobc1 == -1 && sobc2 == -1)
-					sobc[items][index] = soi[items][index] = -1;
+					sobc[1][index] = soi[1][index] = -1;
 				else if(sobc1 == -1 && cost2 <= s)
 				{
-					sobc[items][index] = sobc2 + costs[index];
-					soi[items][index] = soi2 + index;
+					sobc[1][index] = sobc2 + costs[index];
+					soi[1][index] = soi2 + index;
 				}
 				else if(sobc1 == -1 && cost1 <= s)
 				{
-					sobc[items][index] = sobc1;
-					soi[items][index] = soi1;
+					sobc[1][index] = sobc1;
+					soi[1][index] = soi1;
 				}
 				else
 				{
 					if(cost2 < cost1 && cost2 <= s)
 					{
-						sobc[items][index] = sobc2 + costs[index];
-						soi[items][index] = soi2 + index;
+						sobc[1][index] = sobc2 + costs[index];
+						soi[1][index] = soi2 + index;
 					}
 					else if(cost1 <= s)
 					{
-						sobc[items][index] = sobc1;
-						soi[items][index] = soi1;
+						sobc[1][index] = sobc1;
+						soi[1][index] = soi1;
 					}
 					else
 					{
-						sobc[items][index] = soi[items][index] = -1;
+						sobc[1][index] = soi[1][index] = -1;
 					}
 				}
 			}
 		}
-		if(sobc[items][n] == -1)
+		if(sobc[1][n] == -1)
 			break;
+		for(int i=0;i<=n;i++)
+		{
+			sobc[0][i] = sobc[1][i];
+			soi[0][i] = soi[1][i];
+		}
+
 	}
 	items--;
-	cout<<items<<" "<<(sobc[items][n] + (soi[items][n]*items));
+	cout<<items<<" "<<(sobc[0][n] + (soi[0][n]*items));
 }
 
 pii recursive(int sobc, int soi, int i, int noi)
