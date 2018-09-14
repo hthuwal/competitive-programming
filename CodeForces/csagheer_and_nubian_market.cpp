@@ -11,8 +11,8 @@ map<pii, pii> hc;
 
 void dp()
 {
-	int sobc[2][n+1];
-	int soi[2][n+1];
+	lli sobc[2][n+1];
+	lli soi[2][n+1];
 
 	//initialization
 	for(int i=0;i<=n;i++)
@@ -33,15 +33,15 @@ void dp()
 			else
 			{
 				// I dont try to buy this item
-				int sobc1 = sobc[1][index-1];
-				int soi1 = soi[1][index-1];
+				lli sobc1 = sobc[1][index-1];
+				lli soi1 = soi[1][index-1];
+				lli cost1 = sobc1 + soi1 * items;
 
-				// If I try to buy this item
-				int sobc2 = sobc[0][index-1];
-				int soi2 = soi[0][index-1];
+				// I try to buy this item
+				lli sobc2 = sobc[0][index-1];
+				lli soi2 = soi[0][index-1];
+				lli cost2 = sobc2 + costs[index] + (soi2 + index) * items;
 
-				int cost1 = sobc1 + soi1 * items;
-				int cost2 = sobc2 + costs[index] + (soi2 + index) * items;
 				
 				if(sobc1 == -1 && sobc2 == -1)
 					sobc[1][index] = soi[1][index] = -1;
@@ -50,7 +50,7 @@ void dp()
 					sobc[1][index] = sobc2 + costs[index];
 					soi[1][index] = soi2 + index;
 				}
-				else if(sobc1 == -1 && cost1 <= s)
+				else if(sobc2 == -1 && cost1 <= s)
 				{
 					sobc[1][index] = sobc1;
 					soi[1][index] = soi1;
@@ -92,7 +92,7 @@ pii recursive(int sobc, int soi, int i, int noi)
 
 
 	int cost = sobc + soi*noi;
-	if(i >= n || cost == s)
+	if(i > n || cost == s)
 	{
 		return make_pair(noi, cost);
 	}
@@ -108,7 +108,7 @@ pii recursive(int sobc, int soi, int i, int noi)
 
 	// consider buying the ith item
 	int new_sobc = sobc + costs[i];
-	int new_soi = soi + i + 1;
+	int new_soi = soi + i;
 	int new_noi = noi + 1;
 
 	int new_cost = new_sobc + new_soi * new_noi;
@@ -138,8 +138,8 @@ int main()
     cin>>n>>s;
 	for(int i=1;i<=n;i++)
 		cin>>costs[i];
-	// pii ans = recursive(0, 0, 0, 0);
-	// cout<<ans.first<<" "<<ans.second;
+	pii ans = recursive(0, 0, 1, 0);
+	cout<<ans.first<<" "<<ans.second<<"\n";
 	// print(vi(costs, costs+n), n);
 	dp();
 }
