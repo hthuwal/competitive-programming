@@ -1,13 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define vi vector<int>
 #define pii pair<int,int>
 #define lli long long int
+#define vi vector<lli>
 
 int costs[111111];
 int n, s;
+int ans=0;
+int ans_cost=0;
+
 map<pii, pii> hc;
+
+/**
+ * Solution Using Binary Search
+ * This got accepted.
+ * Time Complexity: O(n * ((log n)^2)
+ */
+void bsearch()
+{
+    lli l = 0, h=n;
+    while(l<=h)
+    {
+        // cout<<l<<" "<<h<<endl;
+        lli k = l+(h-l)/2;
+        vi new_costs(costs+1, costs+n+1);
+        for(lli i=0 ;i<new_costs.size();i++)
+            new_costs[i] = new_costs[i] + k*(i+1);
+
+        sort(new_costs.begin(), new_costs.end());
+
+        lli cost = 0;
+        for(lli i=0; i<k; i++)
+            cost += new_costs[i];
+
+        if(cost > s)
+            h = k-1;
+        else if(cost <= s)
+        {
+            if(k>ans)
+            {
+                ans = k;
+                ans_cost = cost;
+            }
+            l = k + 1;
+        }
+
+    }
+    cout<<ans<<" "<<ans_cost<<"\n";
+}
+
 
 void dp()
 {
@@ -84,7 +126,7 @@ void dp()
 
 	}
 	items--;
-	cout<<items<<" "<<(sobc[0][n] + (soi[0][n]*items));
+	cout<<items<<" "<<(sobc[0][n] + (soi[0][n]*items))<<"\n";
 }
 
 pii recursive(int sobc, int soi, int i, int noi)
@@ -138,8 +180,9 @@ int main()
     cin>>n>>s;
 	for(int i=1;i<=n;i++)
 		cin>>costs[i];
-	pii ans = recursive(0, 0, 1, 0);
+		pii ans = recursive(0, 0, 1, 0);
 	cout<<ans.first<<" "<<ans.second<<"\n";
 	// print(vi(costs, costs+n), n);
 	dp();
+    bsearch();
 }
