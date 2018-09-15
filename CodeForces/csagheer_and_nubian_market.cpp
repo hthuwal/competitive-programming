@@ -16,6 +16,7 @@ map<pii, pii> hc;
  * Solution Using Binary Search
  * This got accepted.
  * Time Complexity: O(n * ((log n)^2)
+ * Space: O(n)
  */
 void bsearch()
 {
@@ -50,7 +51,14 @@ void bsearch()
     cout<<ans<<" "<<ans_cost<<"\n";
 }
 
-
+/**
+ * Using Dynamic Programming
+ * Dependency on just previous level
+ * Time Complexity: O(n^2)
+ * Space Complexity: O(n^2) naive, Only two levels O(n)
+ * Not accepted yet. There is some bug thata I can't find out yet
+ * Wrong answer on test case 30
+ */
 void dp()
 {
 	lli sobc[2][n+1];
@@ -129,6 +137,18 @@ void dp()
 	cout<<items<<" "<<(sobc[0][n] + (soi[0][n]*items))<<"\n";
 }
 
+/**
+ * Recursive Solution
+ * @param  sobc [sum of base costs of the optimum solution using array upto i]
+ * @param  soi  [sum of indices of the optimum solution using array upto i]
+ * @param  i    [consider the array from 0 to i]
+ * @param  noi  [the optimum number of itmes upto i-1]
+ * @return      [pair<optimum_number_of_items, minimum cost>]
+ *
+ * Time Complexity: O(2^(n)) :P
+ * With memoization should theoreticall by O(n^2)
+ * but gives TLE on 11th test case
+ */
 pii recursive(int sobc, int soi, int i, int noi)
 {	
 
