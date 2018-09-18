@@ -65,7 +65,7 @@ int main()
 		// since the ans_i is the sum if these were the 0th bits
 		// but these are (bit_number)th bit
 		// so multiply by 2**(bit_number)
-		ans += pow(2, bit_number)*ans_i;
+		ans += int(pow(2, bit_number))*ans_i;
 	}
 	printf("%lld\n", ans);
 }
