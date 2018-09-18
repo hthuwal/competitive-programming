@@ -1,3 +1,10 @@
+'''
+In the kids version of the game Twister, a player has to form close T-shapes with his moves.
+After 5 moves, if a T-shape is formed, the player wins.
+Given 5 two-dimentional coordinate points, can you tell whether they are closely T-shaped or not?
+Print YES if a T-shape can be formed, and NO if not.
+'''
+
 from collections import Counter
 
 t = int(input().strip())
@@ -29,7 +36,7 @@ while(t > 0):
             else:
                 temp = [each[1] for each in points if each[0] == x]
                 temp.sort()
-                
+
                 if temp[0] != temp[1] - 1 or temp[1] != temp[2] - 1:
                     ans = False
                 else:
