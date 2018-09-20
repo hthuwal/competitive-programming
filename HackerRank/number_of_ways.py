@@ -1,8 +1,10 @@
+memo = {}
+
+
 def memoize(f):
-    memo = {}
 
     def inner(a, b, c):
-        key = a + b + c
+        key = a + "_" + b + "_" + c
         if key not in memo:
             memo[key] = f(a, b, c)
         return memo[key]
@@ -11,21 +13,26 @@ def memoize(f):
 
 @memoize
 def recursive(a, b, c):
-    if c == "":
+    if c == "" and b != glb and a != gla:
         return 1
+    elif c == "" and (b == glb or a == gla):
+        return 0
     else:
         ans = 0
-        index = a.find(c[0], 0)
+        index = a.find(c[0])
         while(index != -1):
             ans = (ans + recursive(a[index + 1:], b, c[1:])) % 1000000007
             index = a.find(c[0], index + 1)
 
-        index = b.find(c[0], 0)
+        index = b.find(c[0])
         while(index != -1):
             ans = (ans + recursive(a, b[index + 1:], c[1:])) % 1000000007
             index = b.find(c[0], index + 1)
         return ans
 
 
-a, b, c = input().strip().split()
-print(recursive(a, b, c))
+gla, glb, glc = input().strip().split()
+
+for each in gla:
+    print(each)
+# print(recursive(gla, glb, glc))
