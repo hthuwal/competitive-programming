@@ -4,7 +4,7 @@ using namespace std;
 
 class Heap{
 private:
-	bool ismin;
+	bool ismin; 
 	vi nodes;
 public:
 	Heap(bool min=true){
