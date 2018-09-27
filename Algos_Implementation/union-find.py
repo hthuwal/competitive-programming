@@ -12,7 +12,7 @@ after each query: => O(q*n) TLE in 8-10 cases
     (Complexity becomes log*(n))
 
 """
-
+import timeit
 
 parents = {}
 size = {}
@@ -116,12 +116,49 @@ def size_weighted_union_find_path_compression(a, b):
                 max_size = size[pb]
 
 
+def execute(queries, func):
+    for a, b in queries:
+        func(a, b)
+
+
 q = int(input())
+queries = []
 while(q > 0):
     a, b = input().strip().split()
-    union_basic(a, b)
-    # size_weighted_union(a, b)
-    # union_find_path_compression(a, b)
-    # size_weighted_union_find_path_compression(a, b)
-    print(max_size)
+    queries.append((a, b))
     q -= 1
+
+# execute(queries, union_basic)
+# execute(queries, size_weighted_union)
+# execute(queries, size_weighted_union_find_path_compression)
+
+
+def wrapper(func, *args, **kwargs):
+    def wrapped():
+        return func(*args, **kwargs)
+    return wrapped
+
+
+parents.clear()
+size.clear()
+max_size = 1
+wrapped = wrapper(execute, queries, union_basic)
+print("Basic Union Find: ", timeit.timeit(wrapped, number=100) / 100.0)
+
+parents.clear()
+size.clear()
+max_size = 1
+wrapped = wrapper(execute, queries, size_weighted_union)
+print("Size Weighted Union, Basic Find: ", timeit.timeit(wrapped, number=100) / 100.0)
+
+parents.clear()
+size.clear()
+max_size = 1
+wrapped = wrapper(execute, queries, union_find_path_compression)
+print("Basic Union, Path compression in find: ", timeit.timeit(wrapped, number=100) / 100.0)
+
+parents.clear()
+size.clear()
+max_size = 1
+wrapped = wrapper(execute, queries, size_weighted_union_find_path_compression)
+print("Size Weighted Union,, Path compression in find: ", timeit.timeit(wrapped, number=100) / 100.0)
