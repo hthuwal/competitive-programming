@@ -4,11 +4,22 @@
 - Heap Sort
 - Quick Sort
 
+### To Run
+
+```bash
+g++ *.h *.cpp && ./a.out
+```
+
+Expected Input: 
+
+- **n** denoting the number of integers to be sorted. 
+- Followed by the list of integers (space seperated or one on each line)
+
 ### Benchmarks
 
 - Why is quick sort as slow as selection sort? (See Large Inputs)
 - I am pretty sure my implementations of each of the algorithm is right.
-    + Even tried the gfg implementation (same as mine just to be sure)
+    + Even tried the gfg implementation of quick sort(same as mine just to be sure)
     + Quick sort is still pretty damn slow.
 
 **Size of array: 10**
