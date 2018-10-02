@@ -8,6 +8,11 @@ void swap(int &a, int &b)
 
 int partition(int a[], int p, int q)
 {
+	if(p!=q) // for random pivot
+	{
+	    int r = rand() % (q-p) + p;
+	    swap(a[p], a[r]);
+	}
 	int x = a[p]; //first element is the pivot element
 	int i = p;
 	for (int j = i + 1; j <= q; j++)
