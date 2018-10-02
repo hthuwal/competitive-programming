@@ -17,39 +17,49 @@ Expected Input:
 
 ### Benchmarks
 
-- Why is quick sort as slow as selection sort? (See Large Inputs)
-- I am pretty sure my implementations of each of the algorithm is right.
-    + Even tried the gfg implementation of quick sort(same as mine just to be sure)
-    + Quick sort is still pretty damn slow.
+- ~~Why is quick sort as slow as selection sort? (See Large Inputs)~~
+- **Quick Sort: Always implement randomized quick sort.**
 
-**Size of array: 10**
+#### Size of array: 10 (Averaged over 1000 runs)
 
-- Merge Sort: 0.00381125 milli seconds
-- Heap Sort: 0.00336795 milli seconds
-- Quick Sort: 0.00202444 milli seconds
-- Inbuilt Sort: 0.00108685 milli seconds
-- Selection Sort: 0.00207425 milli seconds
+- Merge Sort: 0.000520125 milli seconds
+- Heap Sort: 0.000387505 milli seconds
+- Randomized Quick Sort: 0.000286057 milli seconds
+- Inbuilt Sort: 0.000159212 milli seconds
+- Selection Sort: 0.000205781 milli seconds
 
-**Size of array: 100**
 
-- Merge Sort: 0.0216348 milli seconds
-- Heap Sort: 0.0266459 milli seconds
-- Quick Sort: 0.0309787 milli seconds
-- Inbuilt Sort: 0.00909785 milli seconds
-- Selection Sort: 0.0299537 milli seconds
 
-**Size of array: 1000**
+#### Size of array: 100 (Averaged over 1000 runs)
 
-- Merge Sort: 0.291076 milli seconds
-- Heap Sort: 0.341214 milli seconds
-- Quick Sort: 1.85185 milli seconds
-- Inbuilt Sort: 0.0823451 milli seconds
-- Selection Sort: 1.78685 milli seconds
+- Merge Sort: 0.000520125 milli seconds
+- Heap Sort: 0.000387505 milli seconds
+- Randomized Quick Sort: 0.000286057 milli seconds
+- Inbuilt Sort: 0.000159212 milli seconds
+- Selection Sort: 0.000205781 milli seconds
 
-**Size of array: 10000**
 
-- Merge Sort: 5.78217 milli seconds
-- Heap Sort: 4.76385 milli seconds
-- Quick Sort: 162.094 milli seconds
-- Inbuilt Sort: 1.38744 milli seconds
-- Selection Sort: 180.742 milli seconds
+#### Size of array: 1000 (Averaged over 1000 runs)
+
+- Merge Sort: 0.0799004 milli seconds
+- Heap Sort: 0.117189 milli seconds
+- Randomized Quick Sort: 0.0624245 milli seconds
+- Inbuilt Sort: 0.0399227 milli seconds
+- Selection Sort: 1.06984 milli seconds
+
+#### Size of array: 10000 (Averaged over 100 runs)
+
+- Merge Sort: 0.991509 milli seconds
+- Heap Sort: 1.63837 milli seconds
+- Randomized Quick Sort: 0.794372 milli seconds
+- Inbuilt Sort: 0.57726 milli seconds
+- Selection Sort: 103.746 milli seconds
+
+#### Size of array: 100000 (Averaged over 10 runs)
+
+- Merge Sort: 12.3158 milli seconds
+- Heap Sort: 20.865 milli seconds
+- Randomized Quick Sort: 10.1164 milli seconds
+- Inbuilt Sort: 7.57082 milli seconds
+- Selection Sort: 10558.2 milli seconds
+

@@ -52,8 +52,9 @@ void copy(int a[], int b[], int n)
 
 void execute(string name, int a[], int n, void func(int[], int, int))
 {
+    int runs = 10;
     double time = 0;
-    for(int i=0;i<10;i++)
+    for(int i=0;i<runs;i++)
     {
         auto start = chrono::high_resolution_clock::now();
         func(a, 0, n-1); 
@@ -62,7 +63,7 @@ void execute(string name, int a[], int n, void func(int[], int, int))
         time += duration;
     }
     // print(a, n);
-    cout<<name<<": "<<time/10<<" milli seconds\n";
+    cout<<name<<": "<<time/runs<<" milli seconds\n";
 }
 
 void inbuilt_sort(int a[], int l, int h)
