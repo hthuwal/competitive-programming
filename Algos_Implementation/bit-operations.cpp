@@ -1,11 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/**
+ * Return the value of the ith bit of n
+ */
 int ith_bit(int n, int i)
 {
 	return (n >> i) & 1;
 }
 
+/**
+ * Return the number of non zero bits in n
+ */
 int num_of_non_zero_bits(int n)
 {
 	int count = 0;
@@ -13,6 +19,14 @@ int num_of_non_zero_bits(int n)
 		if((n & 1))
 			count ++;
 	return count;
+}
+
+/**
+ * Return the index of the right most set bit
+ */
+int rmsb(int n)
+{
+	return log2(n & -n);
 }
 
 void print(string str, int i)
