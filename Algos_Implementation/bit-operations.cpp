@@ -23,7 +23,7 @@ void print(string str, int i)
 	cout<<endl;
 }
 
-void print_all_permutations(string str)
+void print_all_subsequences(string str)
 {
 	int n = str.length();
 	for(int i=1;i<(int)pow(2,n); i++)
@@ -41,5 +41,5 @@ int main()
 
 	cout<<num_of_non_zero_bits(n)<<endl;
 
-	print_all_permutations("Harish");
+	print_all_subsequences("Harish");
 }
