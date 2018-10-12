@@ -30,41 +30,44 @@ void solve()
 {
 	int nps = pow(2, n);
 	
-		// dp[i][j] denotes the number of ways assigniing topics to jth student
-		// provided all the items corresponding to set bits of i have already been assigned
-		
-		// Has to be filled bottom up 
-		// because the base case is when no topic is available to be assigned
-		for(int sub=nps-1;sub>=0;sub--)
+	// dp[i][j] denotes the number of ways assigniing topics to jth student
+	// provided all the items corresponding to set bits of i have already been assigned
+	
+	// Has to be filled bottom up 
+	// because the base case is when no topic is available to be assigned
+	for(int sub=nps-1;sub>=0;sub--)
+	{
+		for(int i=0;i<n;i++)
 		{
-			for(int i=0;i<n;i++)
-			{
-				dp[sub][i]=0;
+			dp[sub][i]=0;
 
-				// if there is only one student and there is atleast one topic available
-				if(i==0 and nsb(sub)<n)
+			// if there is only one student and there is atleast one topic available
+			if(i==0 and nsb(sub)<n)
+			{
+				// number of ways is basically the number of available topics that
+				// the student likes
+				for(int j=0;j<n;j++)
 				{
-					// number of ways is basically the number of available topics that
-					// the student likes
-					for(int j=0;j<n;j++)
-					{
-						if(adj[i][j]==1 and bit(j, sub)==0)
-							dp[sub][i] ++;
-					}
+					if(adj[i][j]==1 and bit(j, sub)==0)
+						dp[sub][i] ++;
 				}
-				// else i am the ith student and there are topics available
-				else if(nsb(sub) < n)
+			}
+			// else i am the ith student and there are topics available
+			else if(nsb(sub) < n)
+			{
+				// number of ways the topics can be assigned to remaining i-1
+				// provided i took one of the available topics that i like
+				for(int j=0;j<n;j++)
 				{
-					// number of ways the topics can be assigned to remaining i-1
-					// provided i took one of the available topics that i like
-					for(int j=0;j<n;j++)
-					{
-						if(adj[i][j]==1 and bit(j, sub) == 0)
-							dp[sub][i] += dp[sub ^(int)pow(2,j)][i-1];
-					}
+					if(adj[i][j]==1 and bit(j, sub) == 0)
+						dp[sub][i] += dp[sub ^ (1<<j)][i-1];
 				}
 			}
 		}
+	}
+
+	cout<<dp[0][n-1]<<"\n";
+}
 
 		cout<<dp[0][n-1]<<"\n";
 }
