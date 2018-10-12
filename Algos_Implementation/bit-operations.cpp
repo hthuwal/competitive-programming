@@ -11,6 +11,7 @@ int ith_bit(int n, int i)
 
 /**
  * Return the number of non zero bits in n
+ * O(log2 n) = number of bits in n
  */
 int num_of_non_zero_bits(int n)
 {
@@ -20,6 +21,26 @@ int num_of_non_zero_bits(int n)
 			count ++;
 	return count;
 }
+
+/**
+ * Subtraction of 1 from a number toggles all the bits (from right to left) till the rightmost set 
+ * bit(including the rightmost set bit). So if we subtract a number by 1 and do bitwise & with itself 
+ * (n & (n-1)), we unset the rightmost set bit. If we do n & (n-1) in a loop and count the no of 
+ * times loop executes we get the set bit count.
+ *
+ * O(number of set bits)
+ */
+int num_of_non_zero_bits_faster(int n)
+{
+	int count = 0; 
+    while (n) 
+    { 
+      n &= (n-1) ; 
+      count++; 
+    } 
+    return count;
+}
+
 
 /**
  * Return the index of the right most set bit
