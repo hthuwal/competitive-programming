@@ -69,7 +69,40 @@ void solve()
 	cout<<dp[0][n-1]<<"\n";
 }
 
-		cout<<dp[0][n-1]<<"\n";
+/**
+* O(n* 2^n) algo
+* More Complicated
+*/
+void solve2()
+{
+	int nps = pow(2, n);
+	long dp[nps];
+	memset(dp, 0, sizeof(dp));
+
+	//dp[mask]
+	//let number of set bits in mask=x
+	//dp[mask] denote the number of ways of assigning the set of x items (denoted by mask) to
+	//x people 0 to x-1
+	for(int sub=0;sub<nps;sub++)
+	{
+		int niaa = nsb(sub); //number_of_items_already_assigned
+
+		// try to assign a new item from the list of items
+		for(int item=0;item<n;item++)
+		{
+			// only if the item hasn't already been assigned
+			// and the xth item is willing to take this item
+			if(!bit(item, sub) and adj[niaa][item]==1)
+			{
+				// if no item has already been assigned
+				if(niaa == 0)
+					dp[sub|1<<item] = 1;
+				else
+					dp[sub|1<<item] += dp[sub];
+			}
+		}
+	}
+	cout<<dp[nps-1]<<"\n";
 }
 
 int main()
@@ -84,6 +117,6 @@ int main()
 		// Reading Input
 		l(i,n) l(j,n) cin>>adj[i][j];
 
-		solve();
+		solve2();
 	}
 }
