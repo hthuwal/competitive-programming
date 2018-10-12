@@ -8,11 +8,13 @@ long dp[2097152][21]; // pow(2, 21) = 2097152
 
 int nsb(int n)
 {
-	int count = 0;
-	for(;n>0;n>>=1)
-		if(n&1)
-			count ++;
-	return count;
+	int count = 0; 
+    while (n) 
+    { 
+      n &= (n-1) ; 
+      count++; 
+    } 
+    return count;
 }
 
 int bit(int i, int n)
