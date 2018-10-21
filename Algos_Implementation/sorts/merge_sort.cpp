@@ -1,6 +1,7 @@
 void merge(int a[], int l, int mid, int h) {
-	int i = l, j = mid + 1, k = 0;
-	int *temp = new int[h - l + 1];
+	int i = l, j = mid + 1, k = 0;	
+	int temp[h - l + 1];
+	
 	for (; i <= mid && j <= h;)
 	{
 		if (a[i] < a[j])
@@ -8,6 +9,7 @@ void merge(int a[], int l, int mid, int h) {
 		else
 			temp[k++] = a[j++];
 	}
+
 	while (i <= mid)
 		temp[k++] = a[i++];
 	while (j <= h)
