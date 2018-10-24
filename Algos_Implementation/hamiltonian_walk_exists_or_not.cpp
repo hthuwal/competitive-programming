@@ -48,7 +48,7 @@ public:
 					for(int nbr: adj[i])
 					{
 						if(ith_bit(subset, nbr))
-							dp[subset][i] = dp[subset][i] || dp[subset ^ (i+1)][nbr];
+							dp[subset][i] = dp[subset][i] || dp[subset ^ (1<<(i+1))][nbr];
 
 					}
 				}
@@ -72,5 +72,5 @@ int main()
 		cin>>a>>b;
 		g.addedge(a, b);
 	}
-	cout<< (g.check_if_hamiltonian_exists()?"YES\n":"NO\n");
+	cout<< (g.check_if_hamiltonian_path_exists()?"YES\n":"NO\n");
 }
