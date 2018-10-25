@@ -27,8 +27,6 @@ string superReducedString(string s) {
 }
 ```
 
----
-
 ### [Camel Case](https://www.hackerrank.com/challenges/camelcase)
 
 ```cpp
@@ -98,3 +96,18 @@ def hackerrankInString(s):
     return "NO"
 ```
 
+### [Panagrams](https://www.hackerrank.com/challenges/pangrams/problem)
+
+```cpp
+string pangrams(string s) {
+    int hc_hash[26]={0};
+    for(int i=0;i<s.length();i++)
+    {
+        hc_hash[tolower(s[i])-'a']++;
+    }
+    for(int i=0;i<26;i++)
+        if(hc_hash[i]==0)
+            return "not pangram";
+    return "pangram";
+}
+```
