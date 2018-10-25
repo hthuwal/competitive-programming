@@ -111,3 +111,32 @@ string pangrams(string s) {
     return "pangram";
 }
 ```
+
+### [Weighted Uniform Strings](https://www.hackerrank.com/challenges/weighted-uniform-string/problem)
+
+```cpp
+vector<string> weightedUniformStrings(string s, vector<int> queries) 
+{
+    set<int> dict;
+    
+    dict.insert(s[0]-'a' + 1);
+    int count = 1;
+    for(int i=1;i<s.length();i++)
+    {
+        if(s[i] != s[i-1])
+            count = 1;
+        else
+            count ++;
+        dict.insert(count * (s[i]-'a'+1));
+    }
+    vector<string> ans;
+    for(int x: queries)
+    {
+        if(dict.find(x) != dict.end())
+            ans.push_back("Yes");
+        else
+            ans.push_back("No");
+    }
+    return ans;
+}
+```
