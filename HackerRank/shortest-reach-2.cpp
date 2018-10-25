@@ -23,6 +23,10 @@ public:
 	}
 
 	/*
+	Benchmark: 
+	Number of nodes: 2499
+	Number of Edges: 3121251
+
 	Set: Number of pops: 3747, Time: 1m41.858s
 	Heap: Number of pops: 3747, Time: 1m41.821ss
 
