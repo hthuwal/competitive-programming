@@ -30,16 +30,16 @@ public:
 	Set: Number of pops: 3747, Time: 1m41.858s
 	Heap: Number of pops: 3747, Time: 1m41.821ss
 
-	Commented code: code for set
+	Commented code: code if you use priority queue
 	 */
 	vector<int> dijsktra(int s)
 	{
 		vector<int> dist(n, INT_MAX);
 		
-		priority_queue<pi> heap;
-		heap.push({0, s});
-		// set<pi> heap;
-		// heap.insert({0, s});
+		// priority_queue<pi> heap;
+		// heap.push({0, s});
+		set<pi> heap;
+		heap.insert({0, s});
 
 		dist[s] = 0;
 		
@@ -48,8 +48,8 @@ public:
 		{
 			count++; //for benchmarking
 			
-			pi top = heap.top();  heap.pop();
-			// pi top = *begin(heap); heap.erase(heap.begin());
+			// pi top = heap.top();  heap.pop();
+			pi top = *begin(heap); heap.erase(heap.begin());
 			
 			int u = top.second;
 
@@ -60,8 +60,8 @@ public:
 				if(dist[u] + w < dist[v])
 				{
 					dist[v] = dist[u] + w;
-					heap.push({-dist[v], v});
-					// heap.insert({dist[v], v});
+					// heap.push({-dist[v], v});
+					heap.insert({dist[v], v});
 				}
 			}
 		}
