@@ -1,8 +1,10 @@
 import os
 import re
+import sys
 
 regex = re.compile(r"-+")
-for root, folders, files in os.walk("."):
+for root, folders, files in os.walk(sys.argv[1]):
+    print(files)
     if root != "." and root != ".git":
         for each in files:
             old = each
