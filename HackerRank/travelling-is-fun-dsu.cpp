@@ -1,7 +1,6 @@
 /**
  * https://www.hackerrank.com/contests/hack-it-to-win-it-paypal/challenges/q4-traveling-is-fun/problem
  *
- * O(n^2) solution 
  */
 
 #include <cmath>
@@ -10,7 +9,7 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-#define N 100005
+#define N 200005
 
 int parent[N];
 int size[N];
@@ -57,18 +56,26 @@ int main() {
         size[i] = 1;
     }
 
-    // O(n^2) loop the culprit
-    for(int i=g+1;i<=n;i++)
-        for(int j=i+1;j<=n;j++)
-            if(gcd(i, j) > g)
+    // No need to find gcd of every pair of numbers
+    
+    // Let x be a number greater than g
+    // Let y be a multiple of x i.e. y = k*x
+    // There gcd will always be = x > g
+    
+    // Therefore all numbers greater than g and their multiples
+    // are connected
+    // O(n)
+    for(int i = g+1;i<=n;i++)
+        for(int j=i;j<=n;j+=i)
+            // if(gcd(i, j) > g)
                 uni(i, j);
     
     vector<int> start(t, 0);
-    vector<int> end(t, 0);
     for(int i=0;i<t;i++)
         scanf("%d",&start[i]);
 
     scanf("%d", &t);
+    vector<int> end(t, 0);
     for(int i=0;i<t;i++)
         scanf("%d",&end[i]);
     
