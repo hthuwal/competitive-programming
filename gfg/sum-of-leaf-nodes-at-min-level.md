@@ -1,4 +1,4 @@
-### [Sum of Leaf Nodes at Min Level] https://practice.geeksforgeeks.org/problems/sum-of-leaf-nodes-at-min-level/1
+### [Sum of Leaf Nodes at Min Level](https://practice.geeksforgeeks.org/problems/sum-of-leaf-nodes-at-min-level/1)
 
 ```cpp
 struct Node
