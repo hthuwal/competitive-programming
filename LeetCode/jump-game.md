@@ -6,6 +6,8 @@ Each element in the array represents your maximum jump length at that position.
 
 Determine if you are able to reach the last index.
 
+### O(n<sup>2</sup>) solution
+
 ```cpp
 class Solution {
 public:
@@ -26,6 +28,27 @@ public:
         }
       
         return dp[n-1];
+    }
+};
+```
+
+### O(n) Greedy solution
+
+```cpp
+class Solution {
+public:
+    bool canJump(vector<int> &nums)
+    {
+        int n = nums.size();
+        int reach = nums[0];
+        for(int i=1; i<n;i++)
+        {
+            if(i>reach)
+                return false;
+            reach = max(reach, i+nums[i]);
+        }
+        
+        return reach >= n-1;
     }
 };
 ```
