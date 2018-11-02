@@ -43,13 +43,14 @@ int tsp(int n)
 	{
 		for(int j=0;j<n;j++)
 		{
+			dp[sub][j] = INT_MAX;
 			// if the subset doesn't contain the starting vertex no possible solution
 			if(!bit(sub, 0)) 
 				dp[sub][j] = INT_MAX;
 			// else if it contains the starting vertex and has only 1 node in the set
 			else if(nsb(sub) == 1)
 				dp[sub][j] = 0;
-			else
+			else if(bit(sub, j))
 			{
 				dp[sub][j] = INT_MAX; 
 				for(int k=0;k<n;k++)
