@@ -1,3 +1,6 @@
+/**
+ * https://www.hackerearth.com/practice/data-structures/advanced-data-structures/segment-trees/practice-problems/algorithm/reversing-segments-53046b15/
+ */
 #include <bits/stdc++.h>
 #define lli long long int
 
