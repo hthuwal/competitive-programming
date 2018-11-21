@@ -46,7 +46,7 @@ class Solution:
                 r = mid-1
         
         r = r + 1
-        return -1 if a[r] != num else r
+        return -1 if r >= len(a) or a[r] != num else r
         
     def brmo(self, a, l, r, num):
         """
@@ -65,7 +65,7 @@ class Solution:
                 r = mid-1
         
         l = l-1
-        return -1 if a[l] != num else l  
+        return -1 if l<0 or a[l] != num else l  
 
     def searchRange(self, a, num):
         lb = self.blmo(a, 0, len(a)-1, num)
