@@ -70,6 +70,41 @@ vector<pair<int, int> > prime_factorization(int n)
 	return ans;
 }
 
+
+/**
+ * Find Prime Factorization of n.
+ */
+vector<pair<int, int> > prime_factorization_without_sieve(int n)
+{
+	vector<pair<int, int> > ans;
+	int count = 0;
+	while( n % 2 == 0)
+	{
+		n /= 2;
+		count++;
+	}
+	if(count != 0)
+		ans.push_back({2, count});
+
+
+	for(int i=3; i<=sqrt(n); i+=2)
+	{
+		int count = 0;
+		while( n % i == 0)
+		{
+			n /= i;
+			count++;
+		}
+		if(count != 0)
+			ans.push_back({i, count});
+
+	}
+
+	if(n != 1)
+		ans.push_back({n, 1});
+	return ans;
+}
+
 /** 
  * Returns highest power of prime p that divides x!
  */
@@ -89,13 +124,13 @@ lli highest_power_of_p(lli p, lli x)
 int main()
 {
 	cin.sync_with_stdio(false);
-	preprocess();
+	// preprocess();
 	lli t, n;
 	cin>>t;
 	while(t--)
 	{
 		cin>>n;
-		vector<pair<int, int>> factors = prime_factorization(n+1);
+		vector<pair<int, int>> factors = prime_factorization_without_sieve(n+1);
 		bool possible = true;
 		for(auto factor: factors)
 		{
