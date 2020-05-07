@@ -52,3 +52,21 @@ public:
     }
 };
 ```
+
+Another Greedy solution but going backwards
+
+```cpp
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int minimum_true = nums.size()-1;
+        for(int i=nums.size()-2; i>=0; i--){
+            if(i + nums[i] >= minimum_true)
+                minimum_true = i;
+        }
+        if(minimum_true == 0)
+            return true;
+        return false;
+    }
+};
+```
