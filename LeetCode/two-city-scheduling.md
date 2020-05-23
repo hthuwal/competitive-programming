@@ -1,6 +1,6 @@
 ### two-city-scheduling
 
-[Problem](https://leetcode.com/problems/two-city-scheduling/submissions/)
+[Problem](https://leetcode.com/problems/two-city-scheduling)
 
 ### Cpp Solution
 
@@ -21,4 +21,13 @@ public:
         return cost;
     }
 };
+```
+
+### Python Solution
+
+```python
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        costs.sort(key=lambda x: x[0] - x[1])
+        return sum(map(lambda y: y[0], costs[0:len(costs)//2])) + sum(map(lambda y: y[1], costs[len(costs)//2:]))
 ```
