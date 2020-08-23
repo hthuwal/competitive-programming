@@ -1,6 +1,6 @@
 ## Problem
 
-[move-zeroes]()
+[move-zeroes](https://leetcode.com/problems/move-zeroes/)
 
 ## Solution in Cpp
 
@@ -27,4 +27,26 @@ public:
         }
     }
 };
+```
+
+## Solution in go
+
+- count denotes index just in front of last non-zero number
+- Keep replacing count with new non-zeroes and increment count
+- set remaining array to zero
+
+```go
+func moveZeroes(nums []int)  {
+    count := 0
+    for _, num := range nums {
+        if num !=0 {
+            nums[count] = num
+            count++
+        }
+    }
+    for count < len(nums) {
+        nums[count] = 0
+        count ++
+    }
+}
 ```
