@@ -6,6 +6,10 @@ The robot can only move either down or right at any point in time. The robot is 
 
 How many possible unique paths are there?
 
+## Solution
+
+### 2018: O(mxn) time and space
+
 ```cpp
 class Solution {
 public:
@@ -23,6 +27,46 @@ public:
             }
         }
         return dp[m-1][n-1];
+    }
+};
+```
+
+### Solution: O(mxn) time, O(n) space
+
+- Bottom Up (This implementation is). Doesn't have to be
+
+#### Golang 
+
+```go
+func uniquePaths(m int, n int) int {
+    dp := make([]int, n)
+    for i := 0; i< n; i++ {
+        dp[i] = 1;
+    }
+    for i :=0; i < m-1; i++ {
+        for j:=n-2; j >=0; j-- {
+            dp[j] = dp[j] + dp[j+1]
+        }
+    }
+    return dp[0]
+}
+```
+
+#### C++
+
+```cpp
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        int dp[n];
+        for (int i=0;i<n;i++)
+            dp[i] = 1;
+        
+        for (int i=0;i<m-1;i++)
+            for(int j=n-2;j>=0;j--)
+                dp[j] = dp[j] + dp[j+1];
+        
+        return dp[0];
     }
 };
 ```
