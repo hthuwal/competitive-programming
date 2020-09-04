@@ -2,7 +2,7 @@
 
 [Link to Problem](https://leetcode.com/problems/partition-labels/)
 
-# Solution
+## Solution
 
 ```python
 class Solution:
@@ -32,3 +32,84 @@ class Solution:
 
         return ans
 ```
+
+## Solution v2
+
+#### Python Solution
+
+- Took 40ms and 13.7 MB
+
+```python
+class Solution:
+    def partitionLabels(self, S: str) -> List[int]:
+        last_oc = {}
+        for i in range(len(S)):
+            last_oc[S[i]] = i
+        ans = []
+        beg, last = 0, 0
+        for i in range(len(S)):
+            if i > last:
+                ans.append(last - beg + 1)
+                beg = i
+            if last_oc[S[i]] > last:
+                last = last_oc[S[i]]
+        ans.append(len(S) - beg)
+        return ans
+```
+
+#### C++ Solution
+
+- Took 12ms and 6.7 MB
+
+```cpp
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        map<char, int> last_oc;
+        for(int i=0; i<S.length(); i++){
+            last_oc[S[i]] = i;
+        }
+        
+        int beg = 0;
+        int last = 0;
+        vector<int> ans;
+        for(int i=0; i<S.length(); i++){
+            if (i>last) {
+                ans.push_back(last - beg + 1);
+                beg = i;
+            }
+            if (last_oc[S[i]] > last)
+                last = last_oc[S[i]];
+        }
+        ans.push_back(S.length() - beg);
+        return ans;
+    }
+};
+```
+
+#### Go Solution
+
+- Took 0ms 🤷‍♂️ and 2.2 MB
+
+```go
+func partitionLabels(S string) []int {
+    lastOccurrence := map[byte]int{}
+    for i, _ := range S {
+        lastOccurrence[S[i]] = i
+    }
+    ans := []int{}
+    last, beg := 0, 0
+    for i := 0; i < len(S); i++ {
+        if (i > last) {
+            ans = append(ans, last - beg + 1)
+            beg = i;
+        }
+        if lastOccurrence[S[i]] > last {
+            last = lastOccurrence[S[i]]
+        }
+    }
+    ans = append(ans, len(S) - beg)
+    return ans
+}
+```
+
