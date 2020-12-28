@@ -13,7 +13,7 @@ class Tuple {
     }
 }
 
-class TestClass {
+class MultipleOccurrences {
     public static void main(String[] args) throws Exception {
         int x, n, t;
         Scanner s = new Scanner(System.in);
