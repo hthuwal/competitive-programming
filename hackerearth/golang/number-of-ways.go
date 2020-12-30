@@ -3,8 +3,6 @@
  **/
 package main
 
-import "fmt"
-
 type tripletNumberOfWays struct {
 	numW, sumL, sumU int64
 }
@@ -13,10 +11,10 @@ var mod int64
 
 func solveNumberOfWays() {
 	var n, m int
-	fmt.Scanf("%d %d", &n, &m)
+	scanf("%d %d\n", &n, &m)
 	grid := make([]string, n)
 	for i := 0; i < n; i++ {
-		fmt.Scanf("%s", &grid[i])
+		scanf("%s\n", &grid[i])
 	}
 
 	dp := make([][]tripletNumberOfWays, n)
@@ -53,13 +51,13 @@ func solveNumberOfWays() {
 				(sumU + numW) % mod}
 		}
 	}
-	fmt.Println(dp[n-1][m-1].numW)
+	printf("%d\n", dp[n-1][m-1].numW)
 }
 
 func numberOfWays() {
 	var t int
 	mod = 1000000007
-	fmt.Scanf("%d", &t)
+	scanf("%d\n", &t)
 	for t > 0 {
 		solveNumberOfWays()
 		t--

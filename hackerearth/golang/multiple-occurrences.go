@@ -3,8 +3,6 @@
  **/
 package main
 
-import "fmt"
-
 type tupleMultipleOccurrences struct {
 	low  int
 	high int
@@ -12,12 +10,12 @@ type tupleMultipleOccurrences struct {
 
 func multipleOccurrences() {
 	var n, t, x int
-	fmt.Scanf("%d", &t)
+	scanf("%d", &t)
 	for ; t > 0; t-- {
-		fmt.Scanf("%d", &n)
+		scanf("\n%d\n", &n)
 		freq := make(map[int]tupleMultipleOccurrences)
 		for i := 0; i < n; i++ {
-			fmt.Scanf("%d", &x)
+			scanf("%d", &x)
 			if val, ok := freq[x]; ok {
 				val.high = i
 				freq[x] = val
@@ -30,6 +28,6 @@ func multipleOccurrences() {
 		for _, val := range freq {
 			ans += val.high - val.low
 		}
-		fmt.Println(ans)
+		printf("%d\n", ans)
 	}
 }

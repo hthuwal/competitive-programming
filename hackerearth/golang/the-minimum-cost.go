@@ -3,15 +3,13 @@
  **/
 package main
 
-import "fmt"
-
 func solveTestCaseTheMimimumCost() {
 	var n, c01, c10, costA, costB int64
-	fmt.Scanf("%d %d %d", &n, &c01, &c10)
+	scanf("\n%d %d %d\n", &n, &c01, &c10)
 
 	bits := make([]int, n)
 	for i := int64(0); i < n; i++ {
-		fmt.Scanf("%d", &bits[i])
+		scanf("%d", &bits[i])
 	}
 
 	a, b := 0, 1
@@ -33,12 +31,12 @@ func solveTestCaseTheMimimumCost() {
 	if costA < costB {
 		ans = costA
 	}
-	fmt.Println(ans)
+	printf("%d\n", ans)
 }
 
 func theMinimumCost() {
 	var t int
-	fmt.Scanf("%d", &t)
+	scanf("%d", &t)
 
 	for t > 0 {
 		solveTestCaseTheMimimumCost()

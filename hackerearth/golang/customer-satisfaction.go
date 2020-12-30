@@ -4,7 +4,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -36,11 +35,11 @@ func solve(ranges []tuple, l, h int64) int64 {
 
 func solveTestCase() {
 	var n int64
-	fmt.Scanf("%d", &n)
+	scanf("%d\n", &n)
 
 	ranges := make([]tuple, n)
 	for i := int64(0); i < n; i++ {
-		fmt.Scanf("%d %d %d", &(ranges[i].first), &(ranges[i].first), &(ranges[i].second))
+		scanf("%d %d %d\n", &(ranges[i].first), &(ranges[i].first), &(ranges[i].second))
 	}
 
 	sort.Slice(ranges, func(i, j int) bool {
@@ -51,12 +50,12 @@ func solveTestCase() {
 		ranges[i].second += ranges[i-1].second
 	}
 
-	fmt.Println(solve(ranges, 1, ranges[len(ranges)-1].second+1))
+	printf("%d\n", solve(ranges, 1, ranges[len(ranges)-1].second+1))
 }
 
-func main() {
+func customerSatisfaction() {
 	var t int
-	fmt.Scanf("%d", &t)
+	scanf("%d\n", &t)
 	for ; t > 0; t-- {
 		solveTestCase()
 	}
