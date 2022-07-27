@@ -68,7 +68,7 @@ class Int64 {
             return false;
         } else {
             int n = this->digits.size();
-            for (int i = n - 1; i > 0; i--) {
+            for (int i = n - 1; i >= 0; i--) {
                 if (this->digits[i] > other.digits[i]) {
                     return true;
                 } else if (this->digits[i] < other.digits[i]) {
