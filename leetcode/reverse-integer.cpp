@@ -1,12 +1,11 @@
-### [Problem](https://leetcode.com/problems/reverse-integer)
+/* -------------------------------------------------------------------------- */
+/*                https://leetcode.com/problems/reverse-integer               */
+/* -------------------------------------------------------------------------- */
 
-Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range, then return 0.
+#include <bits/stdc++.h>
 
-Assume the environment does not allow you to store 64-bit integers (signed or unsigned).
+using namespace std;
 
-### Solution
-
-```cpp
 /**
  * Custom vector based representation of a 64 bit integer
  **/
@@ -121,4 +120,8 @@ class Solution {
         return num.toInt();
     }
 };
-```
+
+int main() {
+    Solution sol;
+    cout << sol.reverse(123456) << "\n";
+}
