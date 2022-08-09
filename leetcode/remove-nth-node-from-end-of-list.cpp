@@ -2,19 +2,7 @@
 /*       https://leetcode.com/problems/remove-nth-node-from-end-of-list/      */
 /* -------------------------------------------------------------------------- */
 
-#include <iostream>
-#include <vector>
-
-using namespace std;
-
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+#include "common-struct.h"
 
 class Solution
 {
@@ -56,25 +44,6 @@ public:
 int main()
 {
     vector<int> eles({1, 2, 3, 4, 5});
-    ListNode *head = nullptr, *curr = nullptr;
-    for (const auto &ele : eles)
-    {
-        if (head == nullptr)
-        {
-            curr = new ListNode(ele);
-            head = curr;
-        }
-        else
-        {
-            curr->next = new ListNode(ele);
-            curr = curr->next;
-        }
-    }
-
-    ListNode *new_head = Solution().removeNthFromEnd(head, 2);
-    while (new_head != nullptr)
-    {
-        cout << new_head->val << " ";
-        new_head = new_head->next;
-    }
+    ListNode *head = CreateLinkedList(eles);
+    PrintLinkedList(Solution().removeNthFromEnd(head, 2));
 }
