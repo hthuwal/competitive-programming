@@ -8,14 +8,10 @@ using namespace std;
 
 class Solution {
    public:
-    inline bool isClosingBrace(char c) {
-        return c == ']' || c == ')' || c == '}';
-    }
+    inline bool isClosingBrace(char c) { return c == ']' || c == ')' || c == '}'; }
 
     inline char isCorrectPair(char open, char close) {
-        return (open == '(' && close == ')') ||
-               (open == '[' && close == ']') ||
-               (open == '{' && close == '}');
+        return (open == '(' && close == ')') || (open == '[' && close == ']') || (open == '{' && close == '}');
     }
 
     bool isValid(string s) {
@@ -41,9 +37,7 @@ class Solution {
     }
 };
 
-void run(std::string &&pattern) {
-    std::cout << pattern << ": " << Solution().isValid(pattern) << "\n";
-}
+void run(std::string&& pattern) { std::cout << pattern << ": " << Solution().isValid(pattern) << "\n"; }
 
 int main() {
     run("[]{}()");

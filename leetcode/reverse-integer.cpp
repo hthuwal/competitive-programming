@@ -78,9 +78,7 @@ class Int64 {
         }
     }
 
-    bool operator<(const Int64& other) {
-        return !(this->operator>(other));
-    }
+    bool operator<(const Int64& other) { return !(this->operator>(other)); }
 
     void reverse() {
         int i = 0;

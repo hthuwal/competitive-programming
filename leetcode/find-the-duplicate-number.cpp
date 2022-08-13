@@ -2,25 +2,22 @@
 /*          https://leetcode.com/problems/find-the-duplicate-number/          */
 /* -------------------------------------------------------------------------- */
 
-#include <vector>
-#include <unordered_set>
 #include <iostream>
+#include <unordered_set>
+#include <vector>
 
 using namespace std;
 
-class Solution
-{
-public:
+class Solution {
+   public:
     // O(n) time
     // O(1) space
-    int findDuplicateTortoiseAndHare(vector<int> &nums)
-    {
+    int findDuplicateTortoiseAndHare(vector<int>& nums) {
         int tortoise = nums[0];
         int hare = nums[0];
 
         // Detect Cycle
-        do
-        {
+        do {
             tortoise = nums[tortoise];
             hare = nums[hare];
             hare = nums[hare];
@@ -28,8 +25,7 @@ public:
 
         // Find the starting point of cycle
         tortoise = nums[0];
-        while (tortoise != hare)
-        {
+        while (tortoise != hare) {
             tortoise = nums[tortoise];
             hare = nums[hare];
         }
@@ -38,13 +34,10 @@ public:
 
     // O(n) space
     // O(n) time
-    int findDuplicateHashMap(vector<int> &nums)
-    {
+    int findDuplicateHashMap(vector<int>& nums) {
         unordered_set<int> hash;
-        for (int i = 0; i < nums.size(); i++)
-        {
-            if (hash.find(nums[i]) != hash.end())
-            {
+        for (int i = 0; i < nums.size(); i++) {
+            if (hash.find(nums[i]) != hash.end()) {
                 return nums[i];
             }
             hash.insert(nums[i]);
@@ -54,21 +47,17 @@ public:
 
     // O(nlogn) Time
     // O(1) Space
-    int findDuplicateSortBased(vector<int> &nums)
-    {
+    int findDuplicateSortBased(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        for (int i = 1; i < nums.size(); i++)
-        {
-            if (nums[i] == nums[i - 1])
-            {
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] == nums[i - 1]) {
                 return nums[i];
             }
         }
         return -1;
     }
 
-    int findDuplicate(vector<int> &nums)
-    {
+    int findDuplicate(vector<int>& nums) {
         return findDuplicateTortoiseAndHare(nums);
         // return findDuplicateHashMap(nums);
         // return findDuplicateSortBased(nums);
@@ -76,6 +65,6 @@ public:
 };
 
 int main() {
-    vector<int> nums({2,5,9,6,9,3,8,9,7,1}); 
-    cout<<Solution().findDuplicate(nums)<<"\n";
+    vector<int> nums({2, 5, 9, 6, 9, 3, 8, 9, 7, 1});
+    cout << Solution().findDuplicate(nums) << "\n";
 }

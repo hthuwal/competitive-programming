@@ -7,8 +7,7 @@ using namespace std;
 
 class Solution {
    public:
-    Solution() {
-    }
+    Solution() {}
 
     int countPrimes(int n) {
         if (n < 2) {
@@ -40,6 +39,4 @@ class Solution {
     }
 };
 
-int main() {
-    cout << Solution().countPrimes(100);
-}
+int main() { cout << Solution().countPrimes(100); }
