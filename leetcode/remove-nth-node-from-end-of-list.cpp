@@ -32,6 +32,39 @@ class Solution {
         ptr2->next = ptr->next;
         return head;
     }
+
+    ListNode* removeNthFromEndSingleTraversal(ListNode* head, int n) {
+        if (head == nullptr) {
+            return head;
+        }
+
+        int i = 1;
+        ListNode* tail = head;
+        while (i < n && tail->next != nullptr) {
+            tail = tail->next;
+            i++;
+        }
+
+        if (i != n) {
+            return head;
+        }
+
+        ListNode* t1 = head;
+        ListNode* t2 = nullptr;
+
+        while (tail->next != nullptr) {
+            t2 = t1;
+            t1 = t1->next;
+            tail = tail->next;
+        }
+
+        if (t2 != nullptr) {
+            t2->next = t1->next;
+            return head;
+        } else {
+            return t1->next;
+        }
+    }
 };
 
 int main() {
