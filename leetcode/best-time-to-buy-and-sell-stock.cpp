@@ -1,7 +1,3 @@
-/* -------------------------------------------------------------------------- */
-/*       https://leetcode.com/problems/best-time-to-buy-and-sell-stock/       */
-/* -------------------------------------------------------------------------- */
-
 #include <iostream>
 #include <vector>
 
@@ -9,7 +5,9 @@ using namespace std;
 
 class Solution {
    public:
-    int maxProfit(vector<int>& prices) {
+    /* ----- https://leetcode.com/problems/best-time-to-buy-and-sell-stock/ ----- */
+    // Buy once and sell once later
+    int maxProfitSinglePurchase(vector<int>& prices) {
         int minSofar = prices[0];
         int maxProfit = 0;
         int currentProfit = 0;
@@ -21,5 +19,23 @@ class Solution {
             minSofar = min(minSofar, prices[i]);
         }
         return maxProfit;
+    }
+
+    /* ---- https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii ---- */
+    // Buy and sell as many times as you want
+    // Consider the scenario: a b c d -> a<b<c<d
+    // b-a + c-b + d -c => d-a
+    int maxProfit(vector<int>& prices) {
+        int i = 0;
+        int j = 1;
+        int profit = 0;
+        while (j < prices.size()) {
+            if (prices[j] > prices[i]) {
+                profit += (prices[j] - prices[i]);
+            }
+            i++;
+            j++;
+        }
+        return profit;
     }
 };
