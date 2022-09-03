@@ -105,6 +105,22 @@ class Solution {
         return ans;
     }
 
+    ListNode* reverseListIterative(ListNode* head) {
+        if (head == nullptr) {
+            return head;
+        }
+
+        ListNode* prev = nullptr;
+        while (head != nullptr) {
+            ListNode* temp = head->next;
+            head->next = prev;
+            prev = head;
+            head = temp;
+        }
+
+        return prev;
+    }
+
     /* --------- https://leetcode.com/problems/middle-of-the-linked-list -------- */
     ListNode* middleNode(ListNode* head) {
         if (head->next == nullptr) {
