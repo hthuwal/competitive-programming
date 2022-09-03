@@ -7,7 +7,8 @@ using namespace std;
 
 class Solution {
    public:
-    // https://leetcode.com/problems/binary-tree-inorder-traversal/submissions/
+
+    // https://leetcode.com/problems/binary-tree-inorder-traversal
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> ans;
 
