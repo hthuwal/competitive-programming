@@ -6,7 +6,40 @@ using namespace std;
 
 class Solution {
    public:
-    
+    /* ----- https://leetcode.com/problems/remove-nth-node-from-end-of-list ----- */
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if (head == nullptr) {
+            return head;
+        }
+
+        int i = 1;
+        ListNode* tail = head;
+        while (i < n && tail->next != nullptr) {
+            tail = tail->next;
+            i++;
+        }
+
+        if (i != n) {
+            return head;
+        }
+
+        ListNode* t1 = head;
+        ListNode* t2 = nullptr;
+
+        while (tail->next != nullptr) {
+            t2 = t1;
+            t1 = t1->next;
+            tail = tail->next;
+        }
+
+        if (t2 != nullptr) {
+            t2->next = t1->next;
+            return head;
+        } else {
+            return t1->next;
+        }
+    }
+
     /* ------------- https://leetcode.com/problems/linked-list-cycle ------------ */
     bool hasCycle(ListNode* head) {
         if (head == nullptr || head->next == nullptr) {
@@ -66,9 +99,7 @@ class Solution {
         }
     }
 
-    ListNode* deleteDuplicates(ListNode* head) {
-        return deleteDuplicates(head, -200);
-    }
+    ListNode* deleteDuplicates(ListNode* head) { return deleteDuplicates(head, -200); }
 
     /* -------- https://leetcode.com/problems/remove-linked-list-element -------- */
     ListNode* removeElements(ListNode* head, int val) {
@@ -119,21 +150,5 @@ class Solution {
         }
 
         return prev;
-    }
-
-    /* --------- https://leetcode.com/problems/middle-of-the-linked-list -------- */
-    ListNode* middleNode(ListNode* head) {
-        if (head->next == nullptr) {
-            return head;
-        }
-
-        ListNode* t1 = head;
-        ListNode* t2 = head;
-
-        while (t2 != nullptr && t2->next != nullptr) {
-            t1 = t1->next;
-            t2 = t2->next->next;
-        }
-        return t1;
     }
 };
