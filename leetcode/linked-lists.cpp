@@ -151,4 +151,39 @@ class Solution {
 
         return prev;
     }
+
+    /* ----------- https://leetcode.com/problems/linked-list-cycle-ii/ ---------- */
+    ListNode* detectCycle(ListNode* head) {
+        if (head == nullptr) {
+            return nullptr;
+        }
+
+        if (head->next == nullptr) {
+            return nullptr;
+        }
+
+        ListNode* tortoise = head->next;
+        ListNode* hare = head->next->next;
+
+        while (hare != nullptr && hare->next != nullptr) {
+            if (tortoise == hare) {
+                break;
+            }
+
+            tortoise = tortoise->next;
+            hare = hare->next->next;
+        }
+
+        if (tortoise != hare) {
+            return nullptr;
+        }
+
+        tortoise = head;
+        while (tortoise != hare) {
+            tortoise = tortoise->next;
+            hare = hare->next;
+        }
+
+        return tortoise;
+    }
 };
