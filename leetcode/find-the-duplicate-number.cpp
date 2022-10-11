@@ -88,6 +88,16 @@ class Solution {
         return tortoise;
     }
 
+    // O(1) space, O(n) time
+    // Use 0th index as placeholder, since the numbers are in range 1 to n-1
+    // if nums[0] = x swap it with nums[x]
+    int findDuplicateUseArrayForTracking_Cleaner(vector<int>& nums) {
+        while(nums[nums[0]] != nums[0]) {
+            swap(nums[nums[0]], nums[0]);
+        }
+        return nums[0];
+    }
+
     int findDuplicate(vector<int>& nums) {
         return findDuplicateTortoiseAndHare(nums);
         // return findDuplicateHashMap(nums);
