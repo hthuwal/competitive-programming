@@ -2,7 +2,7 @@
 /*                    https://leetcode.com/problems/powx-n                    */
 /* -------------------------------------------------------------------------- */
 
-fn my_pow(x: f64, n: i32) -> f64 {
+pub fn my_pow(x: f64, n: i32) -> f64 {
     let mut ans: f64 = 1.0;
     let mut num = x;
     let mut p = n;
@@ -19,8 +19,4 @@ fn my_pow(x: f64, n: i32) -> f64 {
         p = p / 2;
     }
     ans
-}
-
-fn main() {
-    println!("{}", my_pow(2.0, 10));
 }

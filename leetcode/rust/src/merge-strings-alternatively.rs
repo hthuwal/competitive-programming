@@ -29,10 +29,3 @@ pub fn merge_alternately(word1: String, word2: String) -> String {
     }
     res
 }
-
-fn main() {
-    println!(
-        "{}",
-        merge_alternately("john".to_string(), "doe".to_string())
-    );
-}
