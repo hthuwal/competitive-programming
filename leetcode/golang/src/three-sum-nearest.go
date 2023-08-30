@@ -5,7 +5,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -16,7 +15,7 @@ func Abs(x int) int {
 	return x
 }
 
-func threeSumClosest(nums []int, target int) int {
+func ThreeSumClosest(nums []int, target int) int {
 	sort.Ints(nums)
 
 	closest := nums[0] + nums[1] + nums[2]
@@ -39,8 +38,4 @@ func threeSumClosest(nums []int, target int) int {
 		}
 	}
 	return closest
-}
-
-func run() {
-	fmt.Println(threeSumClosest([]int{0, 0, 0}, 1))
 }

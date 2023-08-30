@@ -3,8 +3,6 @@
 /* -------------------------------------------------------------------------- */
 package main
 
-import "fmt"
-
 var chars = map[byte]string{
 	'2': "abc",
 	'3': "def",
@@ -28,15 +26,10 @@ func solve(digits string, i int, cand_so_far string, ans *[]string) {
 	for _, c := range chars[n] {
 		solve(digits, i+1, cand_so_far+string(c), ans)
 	}
-	return
 }
 
-func letterCombinations(digits string) []string {
+func LetterCombinations(digits string) []string {
 	ans := []string{}
 	solve(digits, 0, "", &ans)
 	return ans
-}
-
-func run() {
-	fmt.Println(letterCombinations("29"))
 }

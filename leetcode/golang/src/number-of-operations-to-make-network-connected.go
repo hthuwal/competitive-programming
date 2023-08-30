@@ -1,8 +1,8 @@
+// https://leetcode.com/problems/number-of-operations-to-make-network-connected/
+
 package main
 
-import "fmt"
-
-func makeConnected(n int, connections [][]int) int {
+func MakeConnected(n int, connections [][]int) int {
 	if len(connections) < n-1 {
 		return -1
 	}
@@ -49,8 +49,4 @@ func makeConnected(n int, connections [][]int) int {
 	}
 
 	return num_components - 1
-}
-
-func main() {
-	fmt.Println(makeConnected(5, [][]int{{0, 1}, {0, 2}, {3, 4}, {2, 3}}))
 }

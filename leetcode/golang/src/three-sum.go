@@ -5,7 +5,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -37,7 +36,7 @@ func twoPointerSum(nums []int, target int, ans *[][]int) {
 	}
 }
 
-func threeSum(nums []int) [][]int {
+func ThreeSum(nums []int) [][]int {
 	sort.Ints(nums)
 	ans := [][]int{}
 	for i := range nums {
@@ -48,8 +47,4 @@ func threeSum(nums []int) [][]int {
 		twoPointerSum(nums[i+1:], -nums[i], &ans)
 	}
 	return ans
-}
-
-func run() {
-	fmt.Println(threeSum([]int{-1, 0, 1, 2, -1, -4}))
 }
