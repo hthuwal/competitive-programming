@@ -39,3 +39,11 @@ void PrintLinkedList(ListNode* head) {
         head = head->next;
     }
 }
+
+template<typename T>
+void PrintVector(vector<T> &&vec) {
+    for (const auto &each: vec) {
+        std::cout<<each<<" ";
+    }
+    std::cout<<"\n";
+}
