@@ -2,8 +2,8 @@
 /*                https://leetcode.com/problems/keys-and-rooms                */
 /* -------------------------------------------------------------------------- */
 
-#include<vector>
-#include<stack>
+#include <stack>
+#include <vector>
 
 using namespace std;
 

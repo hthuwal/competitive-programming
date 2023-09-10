@@ -1,7 +1,6 @@
 /* -------------------------------------------------------------------------- */
-/*    https://leetcode.com/problems/find-eventual-safe-states/submissions/    */
+/*           https://leetcode.com/problems/find-eventual-safe-states          */
 /* -------------------------------------------------------------------------- */
-
 
 #include <iostream>
 #include <vector>
