@@ -80,7 +80,7 @@ func bfs(redGraph, blueGraph [][]int, distanceViaRed, distanceViaBlue []int) {
 
 }
 
-func shortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int {
+func ShortestAlternatingPaths(n int, redEdges [][]int, blueEdges [][]int) []int {
 
 	redGraph, blueGraph := getGraphs(n, redEdges, blueEdges)
 

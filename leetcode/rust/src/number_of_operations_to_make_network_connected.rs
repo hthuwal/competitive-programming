@@ -11,11 +11,8 @@ pub fn make_connected(n: i32, connections: Vec<Vec<i32>>) -> i32 {
     // Create an Adjacency list representation for O(1) edge access
     let mut edge_map: HashMap<usize, Vec<usize>> = HashMap::new();
     for edge in connections.iter() {
-        let edge_list = edge_map.entry(edge[0] as usize).or_default();
-        edge_list.push(edge[1] as usize);
-
-        let edge_list = edge_map.entry(edge[1] as usize).or_default();
-        edge_list.push(edge[0] as usize);
+        edge_map.entry(edge[0] as usize).or_default().push(edge[1] as usize);
+        edge_map.entry(edge[1] as usize).or_default().push(edge[0] as usize);
     }
 
     // Find the number of connected components

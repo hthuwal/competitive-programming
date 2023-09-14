@@ -18,7 +18,7 @@ func calculateTime(e, headID int, manager, informTime []int, memory map[int]int)
 	}
 }
 
-func numOfMinutes(n int, headID int, manager []int, informTime []int) int {
+func NumOfMinutes(n int, headID int, manager []int, informTime []int) int {
 	memory := map[int]int{}
 	for i := 0; i < n; i++ {
 		calculateTime(i, headID, manager, informTime, memory)
