@@ -13,6 +13,9 @@ class Solution {
     // freq[i] = count of i in nums
     // Then its just maxSum Subarray problem
     int deleteAndEarn(vector<int>& nums) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        
         vector<int> freq(10001, 0);
         for (int& num : nums) {
             freq[num]++;
@@ -29,6 +32,6 @@ class Solution {
 };
 
 int main() {
-    vector<int> nums({4,10,10,8,1,4,10,9,7,6});
-    cout<<Solution().deleteAndEarn(nums)<<"\n";
+    vector<int> nums({4, 10, 10, 8, 1, 4, 10, 9, 7, 6});
+    cout << Solution().deleteAndEarn(nums) << "\n";
 }
