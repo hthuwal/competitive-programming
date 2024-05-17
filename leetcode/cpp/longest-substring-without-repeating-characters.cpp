@@ -7,7 +7,7 @@ using namespace std;
 
 class Solution {
    public:
-    // Slinding Window
+    // Sliding Window
     int lengthOfLongestSubstring(string s) {
         unordered_map<char, int> lastSawAt;
         int ans = 0;
@@ -15,7 +15,7 @@ class Solution {
         int j = 0;
 
         while (j < s.size()) {
-            // If you see something that you already say earlier
+            // If you see something that you already saw earlier
             // Move the start of the window to just ahead of where you last saw it, if the window is behind it
             if (lastSawAt.find(s[j]) != lastSawAt.end()) {
                 i = max(i, lastSawAt[s[j]] + 1);

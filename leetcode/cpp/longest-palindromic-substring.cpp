@@ -11,38 +11,31 @@ class Solution {
     string longestPalindrome(string s) {
         int n = s.size();
 
-        // dp[l][i] --> true if s[i:i+l-1] is a palindrome
+        // dp[i][j]: Denotes if string of length l
+        // starting at i is a palindrome
         bool dp[n + 1][n + 1];
-        for (int i = 0; i <= n; i++)
-            for (int j = 0; j <= n; j++) dp[i][j] = false;
+        memset(dp, false, sizeof(dp));
 
-        // All strings of unit length are palindrome
-        for (int i = 0; i < n; i++) {
-            dp[1][i] = true;
-        }
-
-        int start_ans = 0;
-        int length_ans = 1;
-
-        // All string of 2 length
-        for (int i = 0; i < n - 1; i++) {
-            if (s[i] == s[i + 1]) {
-                start_ans = i;
-                length_ans = 2;
-                dp[2][i] = true;
-            }
-        }
-
-        for (int l = 2; l <= n; l++) {
+        int max_l = 0;
+        int start_i = 0;
+        for (int l = 0; l <= n; l++) {
             for (int i = 0; i <= n - l; i++) {
-                dp[l][i] = dp[l - 2][i + 1] && (s[i] == s[i + l - 1]);
+                // A string of length 0 or 1 is always a palindrome
+                if (l == 1 || l == 0) {
+                    dp[l][i] = true;
+                } else {
+                    int j = i + l - 1;
+                    if (s[i] == s[j]) {
+                        dp[l][i] = dp[l - 2][i + 1];
+                    }
+                }
+
                 if (dp[l][i]) {
-                    start_ans = i;
-                    length_ans = l;
+                    start_i = i;
+                    max_l = max(max_l, l);
                 }
             }
         }
-
-        return s.substr(start_ans, length_ans);
+        return s.substr(start_i, max_l);
     }
 };

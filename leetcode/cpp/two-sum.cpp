@@ -2,7 +2,7 @@
 /*                   https://leetcode.com/problems/two-sum/                   */
 /* -------------------------------------------------------------------------- */
 
-#include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 

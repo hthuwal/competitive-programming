@@ -55,27 +55,38 @@ class Solution {
 // Dynamic Programming Solution
 class Solution {
    public:
+    bool startsWith(string& s, int start, string& prefix) {
+        int i = start;
+        int j = 0;
+        while (i < s.size() && j < prefix.size()) {
+            if (s[i] != prefix[j]) {
+                return false;
+            }
+            i++;
+            j++;
+        }
+        return j == prefix.size();
+    }
+
     bool wordBreak(string s, vector<string>& wordDict) {
         int n = s.size();
 
-        bool dp[n];
-        memset(dp, false, sizeof(dp));
+        // dp[i] indicates that if s[i:] is possible with wordDict or not
+        bool dp[n + 1];
+        memset(dp, false, n);
 
+        dp[n] = true;
         for (int i = n - 1; i >= 0; i--) {
-            const string& str = s.substr(i);
-            for (int j = 0; j < wordDict.size(); j++) {
-                const string& word = wordDict[j];
-                if (str.size() >= word.size() && word == str.substr(0, word.size())) {
-                    int left_from = i + word.size();
-
-                    // Nothing is left
-                    if (left_from >= n || dp[left_from]) {
-                        dp[i] = true;
+            for (auto& word : wordDict) {
+                if (startsWith(s, i, word)) {
+                    dp[i] = dp[i + word.size()];
+                    if (dp[i]) {
                         break;
                     }
                 }
             }
         }
+
         return dp[0];
     }
 };
