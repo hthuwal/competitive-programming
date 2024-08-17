@@ -2,45 +2,45 @@
 /*                     https://leetcode.com/problems/3sum/                    */
 /* -------------------------------------------------------------------------- */
 
-#include <bits/stdc++.h>
+#include <vector>
+#include <iostream>
 using namespace std;
 
 class Solution {
    public:
-    void twoPointerSum(vector<int>& nums, int start, int target, vector<vector<int>>* ans) {
-        int i = start;
-        int j = nums.size() - 1;
-        while (i < j) {
-            if (i > start && nums[i] == nums[i - 1]) {
-                i++;
-                continue;
-            }
-
-            if (j < nums.size() - 1 && nums[j] == nums[j + 1]) {
-                j--;
-                continue;
-            }
-
-            if (nums[i] + nums[j] < target) {
-                i++;
-            } else if (nums[i] + nums[j] > target) {
-                j--;
-            } else {
-                ans->push_back({nums[i], nums[j], -target});
-                i++;
-                j--;
-            }
-        }
-    }
-
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> ans;
         sort(nums.begin(), nums.end());
+
         for (int i = 0; i < nums.size(); i++) {
+            // All number beyond this are positive, there sum can never amount to 0
+            if (nums[i] > 0) {
+                break;
+            }
+
+            // We would have found all combinations for the original occurrence, so skip duplicates
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            twoPointerSum(nums, i + 1, -nums[i], &ans);
+
+            int l = i + 1;
+            int r = nums.size() - 1;
+            while (l < r) {
+                int sum = nums[l] + nums[r] + nums[i];
+                if (sum < 0) {
+                    l++;
+                } else if (sum > 0) {
+                    r--;
+                } else {
+                    ans.push_back({nums[i], nums[l], nums[r]});
+                    l++;
+                    r--;
+                    // Find the next new num[i] to avoid duplicates
+                    while (l < r && nums[l] == nums[l - 1]) {
+                        l++;
+                    }
+                }
+            }
         }
         return ans;
     }

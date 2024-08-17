@@ -3,65 +3,156 @@
 /* -------------------------------------------------------------------------- */
 
 #include <iostream>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 using namespace std;
 
 class Solution {
    public:
-    bool isValid(vector<vector<char>>& board, int r, int c) {
-        unordered_set<char> ans;
+    // Brute Force: Check Every Row, Every Column and Every 3X3 square
+    // Time complexity: n^2 + n^2 + n^2 = O(n^2)
+    // Space complexity: O(n) for hash
+    // 0ms, Beats 100%
+    bool isValidSudoku(vector<vector<char>>& board) {
+        for (int i = 0; i < 9; i++) {
+            vector<int> hash(10, 0);
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.') {
+                    continue;
+                }
 
-        // Check the row
-        if (c == -1) {
-            for (int i = 0; i < board.size(); i++) {
-                if (board[r][i] != '.' && ans.find(board[r][i]) != ans.end()) {
+                int num = board[i][j] - '0';
+                hash[num]++;
+                if (hash[num] > 1) {
                     return false;
                 }
-                ans.insert(board[r][i]);
             }
         }
-        // Check the column
-        else if (r == -1) {
-            for (int i = 0; i < board.size(); i++) {
-                if (board[i][c] != '.' && ans.find(board[i][c]) != ans.end()) {
+
+        for (int i = 0; i < 9; i++) {
+            vector<int> hash(10, 0);
+            for (int j = 0; j < 9; j++) {
+                if (board[j][i] == '.') {
+                    continue;
+                }
+
+                int num = board[j][i] - '0';
+                hash[num]++;
+                if (hash[num] > 1) {
                     return false;
                 }
-                ans.insert(board[i][c]);
             }
         }
-        // Check the 3x3 grid
-        else {
-            for (int i = r; i < r + 3; i++) {
-                for (int j = c; j < c + 3; j++) {
-                    if (board[i][j] != '.' && ans.find(board[i][j]) != ans.end()) {
+
+        for (int square = 0; square < 9; square++) {
+            int startRow = (square / 3) * 3;
+            int startCol = (square % 3) * 3;
+            vector<int> hash(10, 0);
+
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    int r = startRow + i;
+                    int c = startCol + j;
+
+                    if (board[r][c] == '.') {
+                        continue;
+                    }
+                    int num = board[r][c] - '0';
+                    hash[num]++;
+                    if (hash[num] > 1) {
                         return false;
                     }
-                    ans.insert(board[i][j]);
                 }
             }
         }
+
         return true;
     }
 
-    bool isValidSudoku(vector<vector<char>>& board) {
-        for (int i = 0; i < board.size(); i++) {
-            if (!isValid(board, i, -1)) {
-                return false;
-            }
+    // Brute Force: Go cell by cell and see if the number has been seen in the row, col or square so far
+    // Time complexity: n^2 = O(n^2)
+    // Space complexity: n*n + n*n + n*(sqrt(n)) = O(n^2)
+    // 15ms
+    bool isValidSudoku2(vector<vector<char>>& board) {
+        // Map of row number and set of characters in that row
+        unordered_map<int, unordered_set<char>> rows;
 
-            if (!isValid(board, -1, i)) {
-                return false;
-            }
-        }
+        // Map of col number and set of characters in that col
+        unordered_map<int, unordered_set<char>> cols;
 
-        for (int i = 0; i < board.size(); i += 3) {
-            for (int j = 0; j < board.size(); j += 3) {
-                if (!isValid(board, i, j)) {
+        // Map of 3x3 square number and set of characters in that square
+        unordered_map<int, unordered_set<char>> squares;
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char c = board[i][j];
+
+                if (c == '.') {
+                    continue;
+                }
+
+                if (rows[i].find(c) != rows[i].end()) {
                     return false;
                 }
+                rows[i].insert(c);
+
+                if (cols[j].find(c) != cols[j].end()) {
+                    return false;
+                }
+                cols[j].insert(c);
+
+                int squareNo = (i / 3) * 3 + j / 3;
+                if (squares[squareNo].find(c) != squares[squareNo].end()) {
+                    return false;
+                }
+                squares[squareNo].insert(c);
             }
         }
+
+        return true;
+    }
+
+    // Same as isValidSudoku2 but using an integer instead of set and doing bitmanipulation instead of set operations
+    // Time complexity: n^2 = O(n^2)
+    // Space complexity: O(n)
+    // 0ms, Beats 100%
+    bool isValidSudoku(vector<vector<char>>& board) {
+        // If kth bit from right in rows[i]'s bit representation is 1 => that in row i, k has been seen
+        int rows[9] = {0};
+
+        // If kth bit from right in cols[i]'s bit representation is 1 => that in col i, k has been seen
+        int cols[9] = {0};
+
+        // If kth bit from right in squares[i]'s bit representation is 1 => that in square i, k has been seen
+        int squares[9] = {0};
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.') {
+                    continue;
+                }
+
+                int k = board[i][j] - '0';
+
+                if (rows[i] & (1 << k)) {
+                    return false;
+                }
+                rows[i] |= (1 << k);
+
+                if (cols[j] & (1 << k)) {
+                    return false;
+                }
+                cols[j] |= (1 << k);
+
+                int squareNo = (i / 3) * 3 + j / 3;
+                if (squares[squareNo] & (1 << k)) {
+                    return false;
+                }
+                squares[squareNo] |= (1 << k);
+            }
+        }
+
         return true;
     }
 };

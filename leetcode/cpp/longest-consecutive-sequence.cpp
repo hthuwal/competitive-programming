@@ -4,6 +4,7 @@
 
 #include <stack>
 #include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 int biggestConnectedComponent(unordered_map<int, vector<int>>& graph) {
@@ -97,5 +98,26 @@ int longestConsecutive(vector<int>& nums) {
         return ca;
     }
 
+    return ans;
+}
+
+// O(n): Using hashing
+int longestConsecutive(vector<int>& nums) {
+    unordered_set<int> hash(nums.begin(), nums.end());
+    int ans = 0;
+    for (auto num : hash) {
+        // Does a number smaller than this exist?
+        // No: Then this is the beginning of a sequence. Find the length of sequence starting from this number.
+        // Yes: Then this is not the beginning of a sequence and will be counted in the sequence starting from the
+        // smaller number.
+        if (hash.find(num - 1) == hash.end()) {
+            int length = 1;
+            // Iterate as long as we keep finding larger and larger number
+            while (hash.find(num + length) != hash.end()) {
+                length++;
+            }
+            ans = max(ans, length);
+        }
+    }
     return ans;
 }

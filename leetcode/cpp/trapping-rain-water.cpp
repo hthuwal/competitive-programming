@@ -9,6 +9,38 @@ using namespace std;
 
 class Solution {
    public:
+    // Two pointer approach
+    // Time complexity: O(n)
+    // Space complexity: O(1)
+    int trap(vector<int>& height) {
+        int l = 0;
+        int r = height.size() - 1;
+
+        int leftMax = height[l];
+        int rightMax = height[r];
+        int res = 0;
+        while (l < r) {
+            // If number towards right is greater than left
+            // then we can trap water in `l` only based on leftMax
+            if (leftMax < rightMax) {
+                l++;
+                leftMax = max(leftMax, height[l]);
+                res += leftMax - height[l];
+            }
+            // If number towards left is greater than right
+            // then we can trap water in `r` only based on rightMax
+            else {
+                r--;
+                rightMax = max(rightMax, height[r]);
+                res += rightMax - height[r];
+            }
+        }
+        return res;
+    }
+
+    // Two pointer approach
+    // Time complexity: O(n)
+    // Space complexity: O(n)
     int trap(vector<int>& height) {
         int n = height.size();
 
